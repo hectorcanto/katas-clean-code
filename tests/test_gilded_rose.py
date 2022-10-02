@@ -1,18 +1,23 @@
 import pytest
-from katas.gilded_rose import NewGildedRose, Item, dispatch_updater, Catalog, SULFURAS_DEFAULT_QUALITY
-from katas.gilded_rose_original import GildedRose as LegacyGildedRose
-from katas.gilded_rose_original import Item as LegacyItem
+from katas.gilded_rose import (
+    NewGildedRose,
+    Item,
+    dispatch_updater,
+    Catalog,
+    SULFURAS_DEFAULT_QUALITY,
+)
+from katas.gilded_rose_legacy import Item as LegacyItem, GildedRose as LegacyGildedRose
 from katas.gilded_rose_proxy import ProxyGildedRose
 
 
 def test_brie():
     item = Item(Catalog.BRIE, 2, 25)
     updater = dispatch_updater(item.name)
-    updater()
+    updater(item)
     assert item.sell_in == 1
     assert item.quality == 26
 
-    item.update_quality(2)
+    updater(item, 2)
     assert item.sell_in == -1
     assert item.quality == 29
 
@@ -53,7 +58,7 @@ def build_items(days, quality):
     return [
         LegacyItem(Catalog.SULFURAS, days, SULFURAS_DEFAULT_QUALITY),
         LegacyItem(Catalog.BRIE, days, quality),
-        LegacyItem(Catalog.PASSES, days, quality)
+        LegacyItem(Catalog.PASSES, days, quality),
     ]
 
 
@@ -103,6 +108,3 @@ def test_low_quality(new_shop_class):
     legacy_shop, new_shop = run_base_try(2, 0, new_shop_class)
     for index in range(3):
         assert compare_two_items(new_shop.items[index], legacy_shop.items[index])
-
-
-
