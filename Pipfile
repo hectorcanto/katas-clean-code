@@ -1,0 +1,40 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+ipython = "*"
+
+[dev-packages]
+black = "==22.3.0"
+isort = "*"
+flake8 = "*"
+flake8-docstrings = "*"
+docstr-coverage = "*"
+interrogate = "*"
+bandit = "~=1.7.2"
+jake = "~=1.4.5"
+liccheck= ">=0.6.5"
+pytest = "<7.0"
+pytest-env = "*"
+pytest-mock = "*"
+pytest-sugar = "*"
+pytest-cov = "*"
+pylint = "==2.*"
+pylint-common = "*"
+pylint-pytest = "*"
+pylint-pydantic = "*"
+factory-boy = "*"
+pydocstyle = "*"
+diagrams = "*"
+doit = "*"
+pre-commit = "*"
+freezegun = "*"
+pytest-freezegun = "*"
+dotmap = "*"
+ipdb = "*"
+
+
+[requires]
+python_version = "3.9"
